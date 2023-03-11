@@ -2,3 +2,11 @@
 /ApiTest/ApiTest.iml
 /*/*.iml
 /.idea/
+/interview-03/target/test-classes/org/itstack/interview/test/longshu/ApiTest.class
+/interview-03/target/test-classes/org/itstack/interview/test/ApiTest.class
+/interview-03/target/classes/org/itstack/interview/FileUtil.class
+/interview-03/target/classes/org/itstack/interview/longshu/HashCode.class
+/interview-03/target/classes/org/itstack/interview/HashCode.class
+/interview-03/target/classes/org/itstack/interview/longshu/MyTest.class
+/interview-03/target/classes/org/itstack/interview/longshu/RateInfo.class
+/interview-03/target/classes/org/itstack/interview/RateInfo.class
