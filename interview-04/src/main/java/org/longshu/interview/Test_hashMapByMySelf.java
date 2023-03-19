@@ -12,13 +12,47 @@ import java.util.Map;
  * 假设我们有一组7个字符串，需要存放到数组中，但要求在获取每个元素的时候时间复杂度是O(1)。
  * 也就是说你不能通过循环遍历的方式进行获取，而是要定位到数组ID直接获取相应的元素
  */
+
 public class Test_hashMapByMySelf {
 
     public static void main(String[] args) {
+        int h1 = 0b11111111111111110000000000010010;
+        int h2 = 0b11111111111111010000000000010010;
+        testForHashMap扰动函数(h1);
+        System.out.println("---------------------");
+        testForHashMap扰动函数(h2);
         Map<String, String> hashMap = new HashMap(16);
-        hashMap.put("longhsu", null);
-        // 1 << 30 = 2的三十次方
-        System.out.println(1 << 30);
+        hashMap.put("longshu", "longshu1");
+//        // 1 << 30 = 2的三十次方
+//        System.out.println(1 << 30);
+        ArrayList list = new ArrayList();
+    }
+
+    /**
+     *
+     *     static final int hash(Object key) {
+     *         int h;
+     *         return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
+     *     }
+     * 通过异或 让 低16位 也包含了 高16位 的特征。这样当两个低位完全相同，高位不一样的 hash 算出来的结果就不会相同了。
+     * 之所以使用异或是因为跟与、或相比，它的结果是 1、0 的概率更平均。与的结果更倾向于 0，或 的结果更倾向于 1
+     */
+    public static void testForHashMap扰动函数(int h){
+        // 0b开头表示二进制数
+//        int h = 0b11111111111111110000000000000000;
+        System.out.println(Integer.toBinaryString( h ) + ":原值");
+
+        // 无符号右移16位（包括符号位一起移）
+        int i = h >>> 16;
+        // 00000000000000001111111111111111 原本高位的16个1都移到了左边，左边空出的位置补0
+        System.out.println("0000000000000000" + Integer.toBinaryString( i ) + ":无符号右移16位后的值");
+        int hash = h ^ i;
+        // 异或运算 11111111111111111111111111111111 i高16位没东西，直接照搬 h，低16位，不同为1，相同为 0
+        System.out.println(Integer.toBinaryString( hash ) + ":异或运算后的值");
+
+        System.out.println(Integer.toBinaryString( h & i ) + ":与运算后的值");
+        System.out.println(Integer.toBinaryString( h | i ) + ":或运算后的值");
+
     }
 
 
